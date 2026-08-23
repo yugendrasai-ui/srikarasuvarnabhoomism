@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
-import { Plus, ChevronDown, Trash2, Link as LinkIcon, Upload, MapPin } from "lucide-react";
+import { Plus, ChevronDown, Trash2, Link as LinkIcon, Upload, MapPin, X } from "lucide-react";
 import type { Property } from "../../types/property";
 import { addProperty, updateProperty, fetchPropertyById } from "../../services/propertyService";
 
