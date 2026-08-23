@@ -1,0 +1,10 @@
+export const PROPERTY_TYPES = ["Residential Plot", "Agricultural Land", "Commercial Land", "Industrial Land", "Farm House", "Open Plot", "DTCP Approved Plot"];
+export const AREA_UNITS = ["Sq. Yards", "Acres", "Guntas", "Sq. Feet", "Hectares", "Cents", "Bigha"];
+export const DISPLAY_UNITS = ["Sq. Yards", "Sq. Feet", "Acres", "Guntas", "Cents", "Hectares"];
+export const FACINGS = ["East", "West", "North", "South", "North-East", "North-West", "South-East", "South-West"];
+export const ROAD_ACCESS = ["20 ft wide road", "30 ft wide road", "40 ft wide road", "60 ft wide road", "80 ft wide road", "National Highway (NH)", "State Highway", "Mud Road", "No Road Access"];
+export const WATER = ["Borewell", "Canal Water", "Municipal Connection", "Borewell & Canal", "Rain Water", "River Side", "No Water Source"];
+export const ELECTRICITY = ["Domestic Connection", "3-Phase Agricultural", "Commercial Connection", "No Connection", "Near Transformer"];
+export const DISTRICTS = ["Visakhapatnam", "Vizianagaram", "Srikakulam", "East Godavari", "West Godavari", "Krishna", "Guntur", "Prakasam", "Nellore", "Kurnool", "Kadapa", "Anantapur", "Chittoor"];
+export const POPULAR_AREAS = ["Madhurawada", "Rushikonda", "MVP Colony", "Gajuwaka", "Pendurthi", "Anandapuram", "Bheemunipatnam", "Tagarapuvalasa", "Bhogapuram", "Yendada", "Kapuluppada", "Seethammadhara", "Siripuram", "Kothavalasa", "Sabbavaram", "Lankelapalem", "Aganampudi"];
+export const POPULAR_MANDALS = ["Visakhapatnam Rural", "Visakhapatnam Urban", "Anandapuram", "Bheemunipatnam", "Pendurthi", "Padmanabham", "Bhogapuram", "Kothavalasa", "Gajuwaka", "Sabbavaram", "Parawada"];
