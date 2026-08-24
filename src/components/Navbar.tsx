@@ -152,13 +152,22 @@ const Navbar = () => {
               </Link>
             </div>
 
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden text-gray-700 hover:text-[#5C32E6] p-2 rounded-lg"
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            {/* Mobile Actions */}
+            <div className="flex md:hidden items-center gap-2">
+              <Link
+                to="/admin"
+                className="text-[#5C32E6] bg-purple-50 p-2 rounded-lg border border-purple-100 hover:bg-purple-100 transition-colors"
+                title="Admin Portal"
+              >
+                <ShieldCheck className="w-5 h-5" />
+              </Link>
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-700 hover:text-[#5C32E6] p-2 rounded-lg"
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
 
