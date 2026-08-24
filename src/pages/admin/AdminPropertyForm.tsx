@@ -261,7 +261,7 @@ const AdminPropertyForm = () => {
     }
     setSaving(true);
 
-    const propertyData: Omit<Property, "id" | "createdAt" | "updatedAt"> = {
+    const rawPropertyData: Omit<Property, "id" | "createdAt" | "updatedAt"> = {
       title: form.title,
       propertyType: form.propertyType,
       price: Number(form.price),
@@ -280,6 +280,11 @@ const AdminPropertyForm = () => {
       pricePerUnit: form.pricePerUnit.trim() ? form.pricePerUnit.trim() : undefined,
       images: form.imageUrls.map((url, idx) => ({ url, storagePath: "", isPrimary: idx === 0 })),
     };
+
+    // Remove undefined fields to prevent Firestore errors
+    const propertyData = Object.fromEntries(
+      Object.entries(rawPropertyData).filter(([_, v]) => v !== undefined)
+    ) as Omit<Property, "id" | "createdAt" | "updatedAt">;
 
     try {
       if (isEdit && id) {
