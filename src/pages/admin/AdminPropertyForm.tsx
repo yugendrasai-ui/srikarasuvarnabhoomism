@@ -253,7 +253,12 @@ const AdminPropertyForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      alert("Please fill in all required fields correctly.");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     setSaving(true);
 
     const propertyData: Omit<Property, "id" | "createdAt" | "updatedAt"> = {
@@ -283,8 +288,9 @@ const AdminPropertyForm = () => {
         await addProperty(propertyData as any);
       }
       navigate("/admin/properties");
-    } catch (err) {
+    } catch (err: any) {
       console.error("Error saving property:", err);
+      alert("Failed to save property. " + (err.message || "Please try again later."));
       setSaving(false);
     }
   };
