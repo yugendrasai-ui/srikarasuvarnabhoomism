@@ -151,6 +151,30 @@ const AdminPropertyForm = () => {
   const [urlInput, setUrlInput] = useState("");
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [unitPriceInput, setUnitPriceInput] = useState("");
+
+  useEffect(() => {
+    if (!unitPriceInput || !form.area || !form.areaUnit || !form.pricePerUnit) return;
+    const unitsToSqYards: Record<string, number> = {
+      "sq. yards": 1, "sq. yard": 1, "sq. feet": 1 / 9, "sq. ft": 1 / 9,
+      "acres": 4840, "acre": 4840, "guntas": 121, "cents": 48.4, "cent": 48.4,
+      "hectares": 11959.9, "hectare": 11959.9, "bigha": 3025,
+    };
+    const su = form.areaUnit.toLowerCase().trim();
+    const tu = form.pricePerUnit.toLowerCase().trim();
+    const area = Number(form.area);
+    const unitPrice = Number(unitPriceInput);
+
+    if (!isNaN(area) && !isNaN(unitPrice) && unitsToSqYards[su] && unitsToSqYards[tu]) {
+      const areaInSqYards = area * unitsToSqYards[su];
+      const areaInTarget = areaInSqYards / unitsToSqYards[tu];
+      const totalPrice = Math.round(areaInTarget * unitPrice);
+      if (String(totalPrice) !== form.price) {
+         setForm(prev => ({ ...prev, price: String(totalPrice) }));
+         setErrors(prev => ({ ...prev, price: "" }));
+      }
+    }
+  }, [unitPriceInput, form.area, form.areaUnit, form.pricePerUnit]);
 
   useEffect(() => {
     if (isEdit && id) {
@@ -324,28 +348,38 @@ const AdminPropertyForm = () => {
                 <input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="e.g. 5 Acres Lush Green Agricultural Land Near Highway" className={inputCls(errors.title)} />
               </Field>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Field label="Property Type *">
                   <ComboInput value={form.propertyType} onChange={(v) => set("propertyType", v)} options={PROPERTY_TYPES} placeholder="Select or type..." />
-                </Field>
-                <Field label="Price (₹) *" error={errors.price}>
-                  <input type="number" value={form.price} onChange={(e) => set("price", e.target.value)} placeholder="e.g. 5000000" className={inputCls(errors.price)} />
-                </Field>
-                <Field label="Price Display Unit (Optional)">
-                  <ComboInput value={form.pricePerUnit} onChange={(v) => set("pricePerUnit", v)} options={DISPLAY_UNITS} placeholder="e.g. Sq. Feet" />
                 </Field>
                 <Field label="Status *">
                   <ComboInput value={form.status} onChange={(v) => set("status", v)} options={["available", "sold"]} placeholder="Select status" />
                 </Field>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <Field label="Area *" error={errors.area}>
-                  <input type="number" value={form.area} onChange={(e) => set("area", e.target.value)} placeholder="e.g. 5" className={inputCls(errors.area)} />
-                </Field>
-                <Field label="Area Unit *">
-                  <ComboInput value={form.areaUnit} onChange={(v) => set("areaUnit", v)} options={AREA_UNITS} placeholder="Select or type unit" />
-                </Field>
+              <div className="pt-4 border-t border-gray-100 mt-2">
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-3">
+                  Pricing & Area Details
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Field label="Area *" error={errors.area}>
+                    <input type="number" value={form.area} onChange={(e) => set("area", e.target.value)} placeholder="e.g. 5" className={inputCls(errors.area)} />
+                  </Field>
+                  <Field label="Area Unit *">
+                    <ComboInput value={form.areaUnit} onChange={(v) => set("areaUnit", v)} options={AREA_UNITS} placeholder="Select or type unit" />
+                  </Field>
+                  <Field label="Price Display Unit">
+                    <ComboInput value={form.pricePerUnit} onChange={(v) => set("pricePerUnit", v)} options={DISPLAY_UNITS} placeholder="e.g. Sq. Yards" />
+                  </Field>
+                  <Field label="Unit Price (₹) (Auto-calculates)">
+                    <input type="number" value={unitPriceInput} onChange={(e) => setUnitPriceInput(e.target.value)} placeholder="e.g. 2000" className={inputCls()} />
+                  </Field>
+                </div>
+                <div className="mt-4 md:w-1/2">
+                  <Field label="Total Property Price (₹) *" error={errors.price}>
+                    <input type="number" value={form.price} onChange={(e) => { set("price", e.target.value); setUnitPriceInput(""); }} placeholder="e.g. 5000000" className={inputCls(errors.price)} />
+                  </Field>
+                </div>
               </div>
 
               <Field label="Description *" error={errors.description}>
