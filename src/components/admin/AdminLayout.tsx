@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Building2, LogOut, Menu, X, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Building2, LogOut, Menu, X, ChevronRight, Sun, Moon } from "lucide-react";
 import { useState } from "react";
+import { useTheme } from "../../utils/theme";
 
 const navItems = [
   { label: "Dashboard", icon: <LayoutDashboard className="w-5 h-5" />, href: "/admin" },
@@ -11,6 +12,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     localStorage.removeItem("admin_auth");
@@ -18,7 +20,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   };
 
   const Sidebar = () => (
-    <aside className="w-64 bg-[#1E1333] text-white flex flex-col h-full">
+    <aside className="w-64 bg-[#1E1333] dark:bg-[#0F0B1A] text-white flex flex-col h-full transition-colors duration-300">
       {/* Logo */}
       <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between gap-3 bg-white/5">
         <Link to="/" className="inline-block">
@@ -88,7 +90,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   )?.label ?? "Admin";
 
   return (
-    <div className="min-h-screen bg-[#F0F2F5] flex">
+    <div className="min-h-screen bg-[#F0F2F5] dark:bg-[#0B0F19] flex transition-colors duration-300">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/50 z-20 md:hidden" onClick={() => setSidebarOpen(false)} />
@@ -107,21 +109,34 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top Bar */}
-        <header className="bg-white border-b border-gray-200 px-4 md:px-8 py-4 flex items-center gap-4 sticky top-0 z-10 shadow-sm">
-          <button className="md:hidden text-gray-500 hover:text-[#5C32E6] p-1" onClick={() => setSidebarOpen(true)}>
+        <header className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 px-4 md:px-8 py-4 flex items-center gap-4 sticky top-0 z-10 shadow-sm transition-colors">
+          <button className="md:hidden text-gray-500 dark:text-slate-400 hover:text-[#5C32E6] p-1" onClick={() => setSidebarOpen(true)}>
             <Menu className="w-6 h-6" />
           </button>
           <div>
-            <h1 className="text-base font-extrabold text-gray-900">{pageTitle}</h1>
-            <p className="text-xs text-gray-400 hidden sm:block">Srikara Suvarnabhoomi Management Portal</p>
+            <h1 className="text-base font-extrabold text-gray-900 dark:text-white">{pageTitle}</h1>
+            <p className="text-xs text-gray-400 dark:text-slate-500 hidden sm:block">Srikara Suvarnabhoomi Management Portal</p>
           </div>
-          <Link
-            to="/"
-            target="_blank"
-            className="ml-auto text-xs font-semibold text-[#5C32E6] hover:underline flex items-center gap-1"
-          >
-            View Website <ChevronRight className="w-3 h-3" />
-          </Link>
+
+          <div className="ml-auto flex items-center gap-3">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-xl flex items-center justify-center bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-700 dark:text-amber-400 transition-colors shadow-2xs"
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
+            </button>
+
+            <Link
+              to="/"
+              target="_blank"
+              className="text-xs font-semibold text-[#5C32E6] dark:text-[#9B80FF] hover:underline flex items-center gap-1"
+            >
+              View Website <ChevronRight className="w-3 h-3" />
+            </Link>
+          </div>
         </header>
 
         <main className="flex-1 p-4 md:p-8 overflow-y-auto">{children}</main>

@@ -36,28 +36,28 @@ const LocationCombobox = ({ value, onChange }: { value: string; onChange: (v: st
   const filtered = popularLocations.filter(l => l.toLowerCase().includes(value.toLowerCase()));
   return (
     <div ref={ref} className="relative flex-1">
-      <div className="flex items-center border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 focus-within:border-[#5C32E6] focus-within:ring-2 focus-within:ring-[#5C32E6]/20 transition-all">
-        <Search className="w-5 h-5 text-gray-400 mr-2 shrink-0" />
+      <div className="flex items-center border border-gray-300 dark:border-slate-700 rounded-xl px-4 py-3 bg-gray-50 dark:bg-slate-800 focus-within:border-[#5C32E6] focus-within:ring-2 focus-within:ring-[#5C32E6]/20 transition-all">
+        <Search className="w-5 h-5 text-gray-400 dark:text-slate-400 mr-2 shrink-0" />
         <input
           type="text"
           value={value}
           placeholder="Enter City, Locality or Project..."
-          className="w-full bg-transparent focus:outline-none font-semibold text-gray-800 placeholder-gray-400 text-sm"
+          className="w-full bg-transparent focus:outline-none font-semibold text-gray-800 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 text-sm"
           onFocus={() => setOpen(true)}
           onChange={e => { onChange(e.target.value); setOpen(true); }}
         />
-        {value && <button onClick={() => onChange("")} className="ml-1 text-gray-400 hover:text-gray-600"><X className="w-4 h-4" /></button>}
+        {value && <button onClick={() => onChange("")} className="ml-1 text-gray-400 hover:text-gray-600 dark:hover:text-slate-300"><X className="w-4 h-4" /></button>}
       </div>
       {open && (
-        <div className="absolute top-full mt-1 left-0 right-0 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 py-1.5 max-h-52 overflow-y-auto">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-4 pt-1 pb-2">Popular Locations</p>
+        <div className="absolute top-full mt-1 left-0 right-0 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-gray-100 dark:border-slate-700 z-50 py-1.5 max-h-52 overflow-y-auto">
+          <p className="text-[10px] font-bold text-gray-400 dark:text-slate-400 uppercase tracking-wider px-4 pt-1 pb-2">Popular Locations</p>
           {filtered.length > 0 ? filtered.map(loc => (
             <button key={loc} onMouseDown={() => { onChange(loc); setOpen(false); }}
-              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-purple-50 hover:text-[#5C32E6] transition-colors font-medium ${value === loc ? "text-[#5C32E6] bg-purple-50" : "text-gray-700"}`}>
+              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-purple-50 dark:hover:bg-slate-700 hover:text-[#5C32E6] dark:hover:text-[#9B80FF] transition-colors font-medium ${value === loc ? "text-[#5C32E6] dark:text-[#9B80FF] bg-purple-50 dark:bg-slate-700" : "text-gray-700 dark:text-slate-200"}`}>
               {loc}
             </button>
           )) : (
-            <p className="px-4 py-3 text-sm text-gray-400 italic">Searching for "{value}"…</p>
+            <p className="px-4 py-3 text-sm text-gray-400 dark:text-slate-400 italic">Searching for "{value}"…</p>
           )}
         </div>
       )}
@@ -77,20 +77,20 @@ const BudgetDropdown = ({ value, onChange }: { value: string; onChange: (v: stri
   return (
     <div ref={ref} className="relative w-full">
       <button onClick={() => setOpen(!open)}
-        className={`w-full border rounded-xl px-4 py-3 flex items-center justify-between transition-colors ${open ? "border-[#5C32E6] ring-2 ring-[#5C32E6]/20" : "border-gray-300 hover:border-[#5C32E6]"}`}>
-        <span className={`font-medium text-sm ${value ? "text-gray-900" : "text-gray-500"}`}>{value || "Budget"}</span>
-        <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`} />
+        className={`w-full border rounded-xl px-4 py-3 flex items-center justify-between transition-colors bg-white dark:bg-slate-800 ${open ? "border-[#5C32E6] ring-2 ring-[#5C32E6]/20" : "border-gray-300 dark:border-slate-700 hover:border-[#5C32E6]"}`}>
+        <span className={`font-medium text-sm ${value ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-slate-400"}`}>{value || "Budget"}</span>
+        <ChevronDown className={`w-4 h-4 text-gray-400 dark:text-slate-400 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
-        <div className="absolute top-full mt-2 left-0 w-full bg-white rounded-xl shadow-2xl border border-gray-100 z-50 py-1.5">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-4 pt-1 pb-2">Select Budget</p>
+        <div className="absolute top-full mt-2 left-0 w-full bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-gray-100 dark:border-slate-700 z-50 py-1.5">
+          <p className="text-[10px] font-bold text-gray-400 dark:text-slate-400 uppercase tracking-wider px-4 pt-1 pb-2">Select Budget</p>
           {budgetOptions.map(opt => (
             <button key={opt} onClick={() => { onChange(opt); setOpen(false); }}
-              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-purple-50 hover:text-[#5C32E6] transition-colors font-medium ${value === opt ? "text-[#5C32E6] bg-purple-50" : "text-gray-700"}`}>
+              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-purple-50 dark:hover:bg-slate-700 hover:text-[#5C32E6] dark:hover:text-[#9B80FF] transition-colors font-medium ${value === opt ? "text-[#5C32E6] dark:text-[#9B80FF] bg-purple-50 dark:bg-slate-700" : "text-gray-700 dark:text-slate-200"}`}>
               {opt}
             </button>
           ))}
-          {value && <button onClick={() => { onChange(""); setOpen(false); }} className="w-full text-left px-4 py-2.5 text-xs text-red-500 hover:bg-red-50 border-t border-gray-100 transition-colors font-medium">✕ Clear</button>}
+          {value && <button onClick={() => { onChange(""); setOpen(false); }} className="w-full text-left px-4 py-2.5 text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 border-t border-gray-100 dark:border-slate-700 transition-colors font-medium">✕ Clear</button>}
         </div>
       )}
     </div>
@@ -130,7 +130,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F0F2F5]">
+    <div className="flex flex-col min-h-screen bg-[#F0F2F5] dark:bg-[#0B0F19] transition-colors duration-300">
       {/* Hero Section */}
       <section className="relative pt-20 pb-24 sm:pt-24 sm:pb-32 flex items-center justify-center min-h-[520px] sm:min-h-[600px]">
         {/* Background Image */}
@@ -153,17 +153,17 @@ const Home = () => {
           </div>
 
           {/* Search Console */}
-          <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 border border-gray-100 dark:border-slate-800">
             {/* Tabs */}
-            <div className="flex border-b border-gray-200 mb-4 sm:mb-6 pb-0 gap-0.5 overflow-x-auto">
+            <div className="flex border-b border-gray-200 dark:border-slate-800 mb-4 sm:mb-6 pb-0 gap-0.5 overflow-x-auto">
               {tabs.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`pb-3 px-3 sm:px-4 text-xs sm:text-sm font-bold transition-colors border-b-2 whitespace-nowrap ${
                     activeTab === tab
-                      ? "text-[#5C32E6] border-[#5C32E6]"
-                      : "text-gray-500 border-transparent hover:text-gray-900"
+                      ? "text-[#5C32E6] dark:text-[#9B80FF] border-[#5C32E6] dark:border-[#9B80FF]"
+                      : "text-gray-500 dark:text-slate-400 border-transparent hover:text-gray-900 dark:hover:text-white"
                   }`}
                 >
                   {tab}
@@ -179,9 +179,9 @@ const Home = () => {
                 <BudgetDropdown value={budget} onChange={setBudget} />
                 <button
                   onClick={() => navigate(`/properties?type=${tabTypeMap[activeTab] || ""}`)}
-                  className="w-full border border-gray-300 hover:border-[#5C32E6] rounded-xl px-4 py-3 flex items-center justify-between text-sm font-medium text-gray-500 transition-colors"
+                  className="w-full border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-[#5C32E6] rounded-xl px-4 py-3 flex items-center justify-between text-sm font-medium text-gray-500 dark:text-slate-300 transition-colors"
                 >
-                  More Filters <ChevronDown className="w-4 h-4 text-gray-400" />
+                  More Filters <ChevronDown className="w-4 h-4 text-gray-400 dark:text-slate-400" />
                 </button>
               </div>
 
@@ -197,11 +197,11 @@ const Home = () => {
       </section>
 
       {/* Properties Section */}
-      <section className="py-10 sm:py-16 border-t border-gray-100">
+      <section className="py-10 sm:py-16 border-t border-gray-100 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-3">Premium Plots for Sale</h2>
-            <p className="text-gray-500 font-medium text-sm sm:text-base">Explore our exclusive collection of RERA approved and verified plots</p>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">Premium Plots for Sale</h2>
+            <p className="text-gray-500 dark:text-slate-400 font-medium text-sm sm:text-base">Explore our exclusive collection of RERA approved and verified plots</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
@@ -210,7 +210,7 @@ const Home = () => {
                 <Loader2 className="w-10 h-10 animate-spin text-[#5C32E6]" />
               </div>
             ) : featuredProperties.length === 0 ? (
-              <div className="col-span-full py-12 text-center text-gray-500 font-semibold">
+              <div className="col-span-full py-12 text-center text-gray-500 dark:text-slate-400 font-semibold">
                 No featured properties found.
               </div>
             ) : (
@@ -227,10 +227,10 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-6 sm:mb-10">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-2">Trending Growth Corridors</h2>
-              <p className="text-gray-500 text-sm sm:text-base">Most searched localities for high ROI investments</p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mb-2">Trending Growth Corridors</h2>
+              <p className="text-gray-500 dark:text-slate-400 text-sm sm:text-base">Most searched localities for high ROI investments</p>
             </div>
-            <Link to="/sales" className="text-[#5C32E6] font-bold hover:underline hidden sm:block">View all localities &rarr;</Link>
+            <Link to="/sales" className="text-[#5C32E6] dark:text-[#9B80FF] font-bold hover:underline hidden sm:block">View all localities &rarr;</Link>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
@@ -248,13 +248,13 @@ const Home = () => {
                 <div 
                   key={i} 
                   onClick={() => navigate(`/properties?location=${loc.name}`)}
-                  className="border border-gray-200 rounded-xl sm:rounded-2xl p-3 sm:p-5 hover:border-[#5C32E6] hover:shadow-lg transition-all cursor-pointer group bg-white"
+                  className="border border-gray-200 dark:border-slate-800 rounded-xl sm:rounded-2xl p-3 sm:p-5 hover:border-[#5C32E6] dark:hover:border-purple-600 hover:shadow-lg transition-all cursor-pointer group bg-white dark:bg-slate-900"
                 >
                   <div className="flex flex-col gap-1.5 mb-2 sm:mb-4">
-                    <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded w-fit">{loc.trend}</span>
-                    <h3 className="font-bold text-sm sm:text-lg text-gray-900 group-hover:text-[#5C32E6] transition-colors leading-snug">{loc.name}</h3>
+                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded w-fit">{loc.trend}</span>
+                    <h3 className="font-bold text-sm sm:text-lg text-gray-900 dark:text-slate-100 group-hover:text-[#5C32E6] dark:group-hover:text-[#9B80FF] transition-colors leading-snug">{loc.name}</h3>
                   </div>
-                  <p className="text-gray-500 text-xs sm:text-sm">{count} Plots</p>
+                  <p className="text-gray-500 dark:text-slate-400 text-xs sm:text-sm">{count} Plots</p>
                 </div>
               );
             })}
@@ -270,15 +270,15 @@ const Home = () => {
             <div className="lg:w-1/3 lg:sticky lg:top-32">
               <div className="flex items-center gap-4 mb-4 sm:mb-6">
                  <div className="w-8 h-[2px] bg-[#5C32E6]"></div>
-                 <span className="text-[#5C32E6] font-bold text-sm tracking-[0.2em] uppercase">Our Services</span>
+                 <span className="text-[#5C32E6] dark:text-[#9B80FF] font-bold text-sm tracking-[0.2em] uppercase">Our Services</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-tight">
-                Everything you need to <span className="text-[#5C32E6]">invest safely.</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 sm:mb-6 leading-tight">
+                Everything you need to <span className="text-[#5C32E6] dark:text-[#9B80FF]">invest safely.</span>
               </h2>
-              <p className="text-gray-600 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-gray-600 dark:text-slate-300 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed">
                 From legal title checks to guided site tours — we provide integrated real estate services that ensure your land purchase is secure, transparent, and profitable.
               </p>
-              <Link to="/contact" className="inline-flex items-center text-[#5C32E6] font-bold text-base sm:text-lg hover:underline group">
+              <Link to="/contact" className="inline-flex items-center text-[#5C32E6] dark:text-[#9B80FF] font-bold text-base sm:text-lg hover:underline group">
                 Get a free consultation <ArrowUpRight className="ml-1 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Link>
             </div>
@@ -286,40 +286,40 @@ const Home = () => {
             {/* Right side grid */}
             <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative">
               <div className="space-y-4 sm:space-y-6">
-                <div className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-lg transition-shadow group cursor-pointer relative overflow-hidden">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-100 rounded-full flex items-center justify-center mb-4 sm:mb-6 text-orange-600 group-hover:scale-110 transition-transform">
+                <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-lg transition-shadow group cursor-pointer relative overflow-hidden">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-100 dark:bg-orange-950/40 rounded-full flex items-center justify-center mb-4 sm:mb-6 text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform">
                     <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Legal Verification</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm sm:text-base">We conduct rigorous 3-tier legal checks to ensure clear titles and secure your long-term investment.</p>
-                  <ArrowUpRight className="absolute top-6 right-6 sm:top-8 sm:right-8 w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-[#5C32E6] transition-colors" />
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">Legal Verification</h3>
+                  <p className="text-gray-500 dark:text-slate-400 leading-relaxed text-sm sm:text-base">We conduct rigorous 3-tier legal checks to ensure clear titles and secure your long-term investment.</p>
+                  <ArrowUpRight className="absolute top-6 right-6 sm:top-8 sm:right-8 w-5 h-5 sm:w-6 sm:h-6 text-gray-300 dark:text-slate-600 group-hover:text-[#5C32E6] transition-colors" />
                 </div>
-                <div className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-lg transition-shadow group cursor-pointer relative overflow-hidden">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4 sm:mb-6 text-purple-600 group-hover:scale-110 transition-transform">
+                <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-lg transition-shadow group cursor-pointer relative overflow-hidden">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-100 dark:bg-purple-950/40 rounded-full flex items-center justify-center mb-4 sm:mb-6 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
                     <Wallet className="w-6 h-6 sm:w-7 sm:h-7" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Easy Financing</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm sm:text-base">Get seamless access to bank loans and flexible EMI options through our partnered financial institutions.</p>
-                  <ArrowUpRight className="absolute top-6 right-6 sm:top-8 sm:right-8 w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-[#5C32E6] transition-colors" />
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">Easy Financing</h3>
+                  <p className="text-gray-500 dark:text-slate-400 leading-relaxed text-sm sm:text-base">Get seamless access to bank loans and flexible EMI options through our partnered financial institutions.</p>
+                  <ArrowUpRight className="absolute top-6 right-6 sm:top-8 sm:right-8 w-5 h-5 sm:w-6 sm:h-6 text-gray-300 dark:text-slate-600 group-hover:text-[#5C32E6] transition-colors" />
                 </div>
               </div>
               
               <div className="space-y-4 sm:space-y-6 sm:mt-12">
-                <div className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-lg transition-shadow group cursor-pointer relative overflow-hidden">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4 sm:mb-6 text-blue-600 group-hover:scale-110 transition-transform">
+                <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-lg transition-shadow group cursor-pointer relative overflow-hidden">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-100 dark:bg-blue-950/40 rounded-full flex items-center justify-center mb-4 sm:mb-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
                     <Map className="w-6 h-6 sm:w-7 sm:h-7" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Guided Site Tours</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm sm:text-base">Experience hassle-free physical site visits with our local experts providing on-ground insights.</p>
-                  <ArrowUpRight className="absolute top-6 right-6 sm:top-8 sm:right-8 w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-[#5C32E6] transition-colors" />
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">Guided Site Tours</h3>
+                  <p className="text-gray-500 dark:text-slate-400 leading-relaxed text-sm sm:text-base">Experience hassle-free physical site visits with our local experts providing on-ground insights.</p>
+                  <ArrowUpRight className="absolute top-6 right-6 sm:top-8 sm:right-8 w-5 h-5 sm:w-6 sm:h-6 text-gray-300 dark:text-slate-600 group-hover:text-[#5C32E6] transition-colors" />
                 </div>
-                <div className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-lg transition-shadow group cursor-pointer relative overflow-hidden">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-4 sm:mb-6 text-emerald-600 group-hover:scale-110 transition-transform">
+                <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-lg transition-shadow group cursor-pointer relative overflow-hidden">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 dark:bg-emerald-950/40 rounded-full flex items-center justify-center mb-4 sm:mb-6 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
                     <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Resale Assistance</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm sm:text-base">Maximize your ROI with our dedicated resale desk that connects you with premium buyers when you're ready.</p>
-                  <ArrowUpRight className="absolute top-6 right-6 sm:top-8 sm:right-8 w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-[#5C32E6] transition-colors" />
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">Resale Assistance</h3>
+                  <p className="text-gray-500 dark:text-slate-400 leading-relaxed text-sm sm:text-base">Maximize your ROI with our dedicated resale desk that connects you with premium buyers when you're ready.</p>
+                  <ArrowUpRight className="absolute top-6 right-6 sm:top-8 sm:right-8 w-5 h-5 sm:w-6 sm:h-6 text-gray-300 dark:text-slate-600 group-hover:text-[#5C32E6] transition-colors" />
                 </div>
               </div>
             </div>
@@ -331,66 +331,66 @@ const Home = () => {
       <section className="py-12 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4">Proven Results</h2>
-            <p className="text-base sm:text-xl text-gray-500">Real success stories from our trusted real estate investors.</p>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3 sm:mb-4">Proven Results</h2>
+            <p className="text-base sm:text-xl text-gray-500 dark:text-slate-400">Real success stories from our trusted real estate investors.</p>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
             {/* Card 1 */}
-            <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
+            <div className="bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
               <div className="bg-gradient-to-br from-rose-400 to-rose-600 p-8 h-48 flex flex-col justify-center relative overflow-hidden">
                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
                  <h3 className="text-6xl font-black text-white relative z-10">+150%</h3>
                  <p className="text-rose-100 font-medium relative z-10 mt-2">Value Appreciation</p>
               </div>
               <div className="p-8 flex-1 flex flex-col">
-                 <h4 className="text-2xl font-bold text-gray-900 mb-4">High ROI in Bhogapuram</h4>
-                 <p className="text-gray-600 mb-6 leading-relaxed flex-1">Early investors saw land values more than double within 3 years due to the upcoming international airport development.</p>
+                 <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">High ROI in Bhogapuram</h4>
+                 <p className="text-gray-600 dark:text-slate-300 mb-6 leading-relaxed flex-1">Early investors saw land values more than double within 3 years due to the upcoming international airport development.</p>
                  <div className="flex flex-wrap gap-2 mb-6">
-                   <span className="bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">High ROI</span>
-                   <span className="bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">Airport Zone</span>
+                   <span className="bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs font-bold px-3 py-1 rounded-full">High ROI</span>
+                   <span className="bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs font-bold px-3 py-1 rounded-full">Airport Zone</span>
                  </div>
-                 <Link to="/sales" className="text-rose-600 font-bold inline-flex items-center hover:underline">
+                 <Link to="/sales" className="text-rose-600 dark:text-rose-400 font-bold inline-flex items-center hover:underline">
                    View Locality Details <ArrowUpRight className="ml-1 w-4 h-4" />
                  </Link>
               </div>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
+            <div className="bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
               <div className="bg-gradient-to-br from-orange-400 to-orange-500 p-8 h-48 flex flex-col justify-center relative overflow-hidden">
                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
                  <h3 className="text-6xl font-black text-white relative z-10">500+</h3>
                  <p className="text-orange-100 font-medium relative z-10 mt-2">Families Settled</p>
               </div>
               <div className="p-8 flex-1 flex flex-col">
-                 <h4 className="text-2xl font-bold text-gray-900 mb-4">Secure Residential Plots</h4>
-                 <p className="text-gray-600 mb-6 leading-relaxed flex-1">We helped over 500 families secure clear-title plots in premium gated communities across Visakhapatnam.</p>
+                 <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Secure Residential Plots</h4>
+                 <p className="text-gray-600 dark:text-slate-300 mb-6 leading-relaxed flex-1">We helped over 500 families secure clear-title plots in premium gated communities across Visakhapatnam.</p>
                  <div className="flex flex-wrap gap-2 mb-6">
-                   <span className="bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">Residential</span>
-                   <span className="bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">Verified</span>
+                   <span className="bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 text-xs font-bold px-3 py-1 rounded-full">Residential</span>
+                   <span className="bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 text-xs font-bold px-3 py-1 rounded-full">Verified</span>
                  </div>
-                 <Link to="/sales" className="text-orange-600 font-bold inline-flex items-center hover:underline">
+                 <Link to="/sales" className="text-orange-600 dark:text-orange-400 font-bold inline-flex items-center hover:underline">
                    View Completed Projects <ArrowUpRight className="ml-1 w-4 h-4" />
                  </Link>
               </div>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
+            <div className="bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
               <div className="bg-gradient-to-br from-fuchsia-400 to-purple-600 p-8 h-48 flex flex-col justify-center relative overflow-hidden">
                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
                  <h3 className="text-6xl font-black text-white relative z-10">0</h3>
                  <p className="text-fuchsia-100 font-medium relative z-10 mt-2">Legal Disputes</p>
               </div>
               <div className="p-8 flex-1 flex flex-col">
-                 <h4 className="text-2xl font-bold text-gray-900 mb-4">100% Transparent Deals</h4>
-                 <p className="text-gray-600 mb-6 leading-relaxed flex-1">Our rigorous 3-tier legal verification process ensures absolute peace of mind and zero legal complications for our buyers.</p>
+                 <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">100% Transparent Deals</h4>
+                 <p className="text-gray-600 dark:text-slate-300 mb-6 leading-relaxed flex-1">Our rigorous 3-tier legal verification process ensures absolute peace of mind and zero legal complications for our buyers.</p>
                  <div className="flex flex-wrap gap-2 mb-6">
-                   <span className="bg-fuchsia-50 text-fuchsia-700 text-xs font-bold px-3 py-1 rounded-full">Legal Check</span>
-                   <span className="bg-fuchsia-50 text-fuchsia-700 text-xs font-bold px-3 py-1 rounded-full">Secure</span>
+                   <span className="bg-fuchsia-50 dark:bg-fuchsia-950/40 text-fuchsia-700 dark:text-fuchsia-300 text-xs font-bold px-3 py-1 rounded-full">Legal Check</span>
+                   <span className="bg-fuchsia-50 dark:bg-fuchsia-950/40 text-fuchsia-700 dark:text-fuchsia-300 text-xs font-bold px-3 py-1 rounded-full">Secure</span>
                  </div>
-                 <Link to="/sales" className="text-fuchsia-600 font-bold inline-flex items-center hover:underline">
+                 <Link to="/sales" className="text-fuchsia-600 dark:text-fuchsia-400 font-bold inline-flex items-center hover:underline">
                    Learn About Our Process <ArrowUpRight className="ml-1 w-4 h-4" />
                  </Link>
               </div>
@@ -398,8 +398,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-
 
       {/* Stats Section */}
       <section className="py-8 sm:py-10 relative">

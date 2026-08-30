@@ -14,7 +14,11 @@ import AdminProperties from "./pages/admin/AdminProperties";
 import AdminPropertyForm from "./pages/admin/AdminPropertyForm";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
+import { useTheme } from "./utils/theme";
+
 function App() {
+  useTheme();
+
   return (
     <BrowserRouter>
       <Routes>
@@ -22,7 +26,7 @@ function App() {
         <Route
           path="/*"
           element={
-            <div className="min-h-screen bg-[#F0F2F5] flex flex-col font-sans">
+            <div className="min-h-screen bg-[#F0F2F5] dark:bg-[#0B0F19] text-gray-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
               <Navbar />
               <main className="flex-grow">
                 <Routes>

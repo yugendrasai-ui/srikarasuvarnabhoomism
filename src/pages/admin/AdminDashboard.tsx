@@ -66,8 +66,8 @@ const AdminDashboard = () => {
       {/* Welcome */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-extrabold text-gray-900">Welcome back, Subbu! 👋</h2>
-          <p className="text-gray-500 mt-1">Here's what's happening on your platform today.</p>
+          <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">Welcome back, Subbu! 👋</h2>
+          <p className="text-gray-500 dark:text-slate-400 mt-1">Here's what's happening on your platform today.</p>
         </div>
         <Link
           to="/admin/properties/new"
@@ -79,7 +79,7 @@ const AdminDashboard = () => {
 
       {/* Stats */}
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-20 text-gray-500">
+        <div className="flex flex-col items-center justify-center py-20 text-gray-500 dark:text-slate-400">
           <Loader2 className="w-10 h-10 animate-spin text-[#5C32E6] mb-3" />
           Loading dashboard data...
         </div>
@@ -87,52 +87,52 @@ const AdminDashboard = () => {
         <>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {stats.map((stat) => (
-          <div key={stat.label} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className={`w-12 h-12 rounded-xl ${stat.light} flex items-center justify-center shrink-0`}>
+          <div key={stat.label} className="bg-white dark:bg-slate-900 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-slate-800 flex items-center gap-4 transition-colors">
+            <div className={`w-12 h-12 rounded-xl ${stat.light} dark:bg-slate-800 flex items-center justify-center shrink-0`}>
               {stat.icon}
             </div>
             <div>
-              <p className="text-2xl font-extrabold text-gray-900">{stat.value}</p>
-              <p className="text-xs text-gray-500 font-medium mt-0.5">{stat.label}</p>
+              <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{stat.value}</p>
+              <p className="text-xs text-gray-500 dark:text-slate-400 font-medium mt-0.5">{stat.label}</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Recent Properties */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h3 className="font-bold text-gray-900">Recent Properties</h3>
-          <Link to="/admin/properties" className="text-sm text-[#5C32E6] font-semibold hover:underline">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden transition-colors">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-slate-800">
+          <h3 className="font-bold text-gray-900 dark:text-white">Recent Properties</h3>
+          <Link to="/admin/properties" className="text-sm text-[#5C32E6] dark:text-[#9B80FF] font-semibold hover:underline">
             View All →
           </Link>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b border-gray-100">
+            <thead className="bg-gray-50 dark:bg-slate-800/80 border-b border-gray-100 dark:border-slate-800">
               <tr>
-                <th className="text-left px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Property</th>
-                <th className="text-left px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Location</th>
-                <th className="text-left px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Price</th>
-                <th className="text-left px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                <th className="text-left px-6 py-3 text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">Property</th>
+                <th className="text-left px-6 py-3 text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">Location</th>
+                <th className="text-left px-6 py-3 text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">Price</th>
+                <th className="text-left px-6 py-3 text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
+            <tbody className="divide-y divide-gray-50 dark:divide-slate-800">
               {properties.slice(0, 5).map((p: any) => (
-                <tr key={p.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors">
                   <td className="px-6 py-4">
-                    <p className="font-semibold text-gray-900 truncate max-w-[200px]">{p.title}</p>
-                    <p className="text-xs text-gray-400 capitalize mt-0.5">{p.propertyType} · {p.area} {p.areaUnit}</p>
+                    <p className="font-semibold text-gray-900 dark:text-slate-100 truncate max-w-[200px]">{p.title}</p>
+                    <p className="text-xs text-gray-400 dark:text-slate-500 capitalize mt-0.5">{p.propertyType} · {p.area} {p.areaUnit}</p>
                   </td>
-                  <td className="px-6 py-4 text-gray-600">
+                  <td className="px-6 py-4 text-gray-600 dark:text-slate-400">
                     {p.location.village}, {p.location.district}
                   </td>
-                  <td className="px-6 py-4 font-bold text-[#5C32E6]">{formatPrice(p.price)}</td>
+                  <td className="px-6 py-4 font-bold text-[#5C32E6] dark:text-[#9B80FF]">{formatPrice(p.price)}</td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
                       p.status === "available"
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "bg-rose-50 text-rose-700"
+                        ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300"
+                        : "bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300"
                     }`}>
                       {p.status === "available" ? "✓ Available" : "✕ Sold"}
                     </span>

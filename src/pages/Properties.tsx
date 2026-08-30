@@ -47,35 +47,35 @@ const LocationCombobox = ({ value, onChange }: { value: string; onChange: (v: st
 
   return (
     <div ref={ref} className="relative flex-1">
-      <div className="flex items-center border border-gray-300 rounded-xl px-4 py-2.5 bg-gray-50 focus-within:border-[#5C32E6] focus-within:ring-2 focus-within:ring-[#5C32E6]/20 transition-all">
-        <Search className="w-4 h-4 text-gray-400 mr-2 shrink-0" />
+      <div className="flex items-center border border-gray-300 dark:border-slate-700 rounded-xl px-4 py-2.5 bg-gray-50 dark:bg-slate-800 focus-within:border-[#5C32E6] focus-within:ring-2 focus-within:ring-[#5C32E6]/20 transition-all">
+        <Search className="w-4 h-4 text-gray-400 dark:text-slate-400 mr-2 shrink-0" />
         <input
           type="text"
           value={query}
           placeholder="Search by location or locality..."
-          className="w-full bg-transparent focus:outline-none text-sm font-medium text-gray-800 placeholder-gray-400"
+          className="w-full bg-transparent focus:outline-none text-sm font-medium text-gray-800 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500"
           onFocus={() => setOpen(true)}
           onChange={e => { setQuery(e.target.value); onChange(e.target.value); setOpen(true); }}
         />
         {query && (
-          <button onClick={() => { setQuery(""); onChange(""); }} className="ml-1 text-gray-400 hover:text-gray-600">
+          <button onClick={() => { setQuery(""); onChange(""); }} className="ml-1 text-gray-400 hover:text-gray-600 dark:hover:text-slate-300">
             <X className="w-4 h-4" />
           </button>
         )}
       </div>
       {open && (
-        <div className="absolute top-full mt-1 left-0 right-0 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 py-1.5 max-h-56 overflow-y-auto">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-4 pt-1 pb-2">Popular Locations</p>
+        <div className="absolute top-full mt-1 left-0 right-0 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-gray-100 dark:border-slate-700 z-50 py-1.5 max-h-56 overflow-y-auto">
+          <p className="text-[10px] font-bold text-gray-400 dark:text-slate-400 uppercase tracking-wider px-4 pt-1 pb-2">Popular Locations</p>
           {filtered.length > 0 ? filtered.map(loc => (
             <button
               key={loc}
               onMouseDown={() => { onChange(loc); setQuery(loc); setOpen(false); }}
-              className={`w-full text-left px-4 py-2 text-sm hover:bg-purple-50 hover:text-[#5C32E6] transition-colors font-medium ${value === loc ? "text-[#5C32E6] bg-purple-50" : "text-gray-700"}`}
+              className={`w-full text-left px-4 py-2 text-sm hover:bg-purple-50 dark:hover:bg-slate-700 hover:text-[#5C32E6] dark:hover:text-[#9B80FF] transition-colors font-medium ${value === loc ? "text-[#5C32E6] dark:text-[#9B80FF] bg-purple-50 dark:bg-slate-700" : "text-gray-700 dark:text-slate-200"}`}
             >
               {loc}
             </button>
           )) : (
-            <p className="px-4 py-3 text-sm text-gray-500 italic">No matching location — searching for "<span className="font-semibold text-gray-700">{query}</span>"</p>
+            <p className="px-4 py-3 text-sm text-gray-500 dark:text-slate-400 italic">No matching location — searching for "<span className="font-semibold text-gray-700 dark:text-slate-200">{query}</span>"</p>
           )}
         </div>
       )}
@@ -99,18 +99,18 @@ const Dropdown = ({ label, options, value, onChange }: {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className={`flex items-center gap-2 border rounded-xl px-3 py-2.5 text-sm font-medium transition-colors whitespace-nowrap ${open || value ? "border-[#5C32E6] text-[#5C32E6] bg-purple-50" : "border-gray-300 text-gray-700 hover:border-[#5C32E6]"}`}
+        className={`flex items-center gap-2 border rounded-xl px-3 py-2.5 text-sm font-medium transition-colors whitespace-nowrap ${open || value ? "border-[#5C32E6] text-[#5C32E6] dark:text-[#9B80FF] bg-purple-50 dark:bg-slate-800" : "border-gray-300 dark:border-slate-700 text-gray-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:border-[#5C32E6]"}`}
       >
         {selected?.label || label}
         <ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
-        <div className="absolute top-full mt-1 left-0 w-52 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 py-1.5">
+        <div className="absolute top-full mt-1 left-0 w-52 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-gray-100 dark:border-slate-700 z-50 py-1.5">
           {options.map(opt => (
             <button
               key={opt.value}
               onMouseDown={() => { onChange(opt.value); setOpen(false); }}
-              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-purple-50 hover:text-[#5C32E6] transition-colors font-medium ${value === opt.value ? "text-[#5C32E6] bg-purple-50" : "text-gray-700"}`}
+              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-purple-50 dark:hover:bg-slate-700 hover:text-[#5C32E6] dark:hover:text-[#9B80FF] transition-colors font-medium ${value === opt.value ? "text-[#5C32E6] dark:text-[#9B80FF] bg-purple-50 dark:bg-slate-700" : "text-gray-700 dark:text-slate-200"}`}
             >
               {opt.label}
             </button>
@@ -134,18 +134,18 @@ const budgetRanges: Record<string, [number, number]> = {
 // --- Empty state ---
 const EmptyState = ({ type, onReset }: { type: string; onReset: () => void }) => (
   <div className="col-span-full flex flex-col items-center justify-center py-20 px-4 text-center">
-    <div className="w-20 h-20 rounded-2xl bg-purple-50 flex items-center justify-center mb-5 border border-purple-100">
-      <Home className="w-9 h-9 text-[#5C32E6] opacity-60" />
+    <div className="w-20 h-20 rounded-2xl bg-purple-50 dark:bg-slate-800 flex items-center justify-center mb-5 border border-purple-100 dark:border-slate-700">
+      <Home className="w-9 h-9 text-[#5C32E6] dark:text-purple-300 opacity-80" />
     </div>
-    <h3 className="text-xl font-bold text-gray-900 mb-2">No plots available</h3>
-    <p className="text-gray-500 text-sm max-w-xs mb-6">
+    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No plots available</h3>
+    <p className="text-gray-500 dark:text-slate-400 text-sm max-w-xs mb-6">
       {type
         ? `We currently have no ${type} properties matching your filters. Try adjusting your search.`
         : "No properties match your current filters. Try broadening your search."}
     </p>
     <button
       onClick={onReset}
-      className="bg-[#5C32E6] hover:bg-[#4522B8] text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-colors"
+      className="bg-[#5C32E6] hover:bg-[#4522B8] text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-md"
     >
       Clear All Filters
     </button>
@@ -210,9 +210,9 @@ const Properties = () => {
   const typeLabel = typeOptions.find(o => o.value === type)?.label || "All Types";
 
   return (
-    <div className="min-h-screen bg-[#F0F2F5]">
+    <div className="min-h-screen bg-[#F0F2F5] dark:bg-[#0B0F19] transition-colors duration-300">
       {/* Page Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-[64px] z-30">
+      <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 sticky top-[64px] z-30 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
 
           {/* Back + Title row */}
@@ -223,12 +223,12 @@ const Properties = () => {
             >
               <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" /> Home
             </Link>
-            <div className="h-5 w-px bg-gray-200" />
+            <div className="h-5 w-px bg-gray-200 dark:bg-slate-700" />
             <div>
-              <h1 className="text-base sm:text-lg font-extrabold text-gray-900 leading-tight">
+              <h1 className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white leading-tight">
                 {type ? `${typeLabel}` : "All Properties"}
               </h1>
-              <p className="text-xs text-gray-500">{filtered.length} listing{filtered.length !== 1 ? "s" : ""} found</p>
+              <p className="text-xs text-gray-500 dark:text-slate-400">{filtered.length} listing{filtered.length !== 1 ? "s" : ""} found</p>
             </div>
           </div>
 
@@ -253,7 +253,7 @@ const Properties = () => {
               {activeFilterCount > 0 && (
                 <button
                   onClick={resetFilters}
-                  className="flex items-center gap-1 text-xs font-bold text-red-500 hover:text-red-700 border border-red-200 hover:bg-red-50 px-3 py-2 rounded-xl transition-all"
+                  className="flex items-center gap-1 text-xs font-bold text-red-500 hover:text-red-700 border border-red-200 dark:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-950/40 px-3 py-2 rounded-xl transition-all"
                 >
                   <X className="w-3.5 h-3.5" /> Clear ({activeFilterCount})
                 </button>
@@ -263,7 +263,7 @@ const Properties = () => {
             {/* Mobile filter toggle */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`sm:hidden flex items-center gap-1.5 border rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors ${activeFilterCount > 0 ? "border-[#5C32E6] text-[#5C32E6] bg-purple-50" : "border-gray-300 text-gray-700"}`}
+              className={`sm:hidden flex items-center gap-1.5 border rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors ${activeFilterCount > 0 ? "border-[#5C32E6] text-[#5C32E6] dark:text-[#9B80FF] bg-purple-50 dark:bg-slate-800" : "border-gray-300 dark:border-slate-700 text-gray-700 dark:text-slate-300 bg-white dark:bg-slate-800"}`}
             >
               <SlidersHorizontal className="w-4 h-4" />
               Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
@@ -272,7 +272,7 @@ const Properties = () => {
 
           {/* Mobile filter panel */}
           {showFilters && (
-            <div className="sm:hidden mt-3 pt-3 border-t border-gray-100 flex flex-col gap-2">
+            <div className="sm:hidden mt-3 pt-3 border-t border-gray-100 dark:border-slate-800 flex flex-col gap-2">
               <Dropdown label="Property Type" options={typeOptions} value={type} onChange={setType} />
               <Dropdown
                 label="Budget"
@@ -281,7 +281,7 @@ const Properties = () => {
                 onChange={setBudget}
               />
               {activeFilterCount > 0 && (
-                <button onClick={resetFilters} className="flex items-center gap-1 text-xs font-bold text-red-500 border border-red-200 px-3 py-2 rounded-xl w-fit">
+                <button onClick={resetFilters} className="flex items-center gap-1 text-xs font-bold text-red-500 border border-red-200 dark:border-red-900/50 px-3 py-2 rounded-xl w-fit">
                   <X className="w-3.5 h-3.5" /> Clear All Filters
                 </button>
               )}
@@ -293,10 +293,10 @@ const Properties = () => {
       {/* Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {loading ? (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 py-24 text-center">
-            <Loader2 className="w-12 h-12 text-[#5C32E6] animate-spin mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Loading Properties</h3>
-            <p className="text-gray-500">Connecting to database...</p>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 py-24 text-center">
+            <Loader2 className="w-12 h-12 text-[#5C32E6] dark:text-[#9B80FF] animate-spin mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Loading Properties</h3>
+            <p className="text-gray-500 dark:text-slate-400">Connecting to database...</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7">
