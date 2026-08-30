@@ -178,7 +178,7 @@ const AdminPropertyForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Pricing Mode: 'total' (Enter Total Price) or 'rate' (Enter Rate per Unit)
-  const [priceMode, setPriceMode] = useState<"total" | "rate">("total");
+  const [priceMode, setPriceMode] = useState<"total" | "rate">("rate");
   const [rateInput, setRateInput] = useState("");
 
   useEffect(() => {
