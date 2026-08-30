@@ -78,7 +78,7 @@ const NavDropdown = ({ label, href }: { label: string; href: string }) => {
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, toggleTheme, isDark } = useTheme();
+  const { toggleTheme, isDark } = useTheme();
 
   const navLinks = [
     { label: "Buy", href: "/properties" },
